@@ -3,8 +3,9 @@ package com.eklanfar.library.util;
 public class Enums {
 
     //DIGITS WEIGHTING
-    public enum DigitWeighting {
+    public enum DigitValue {
 
+        BLANK("<", 0),
         ONE("1", 1), TWO("2", 2), THREE("3", 3),
         FOUR("4", 4), FIVE("5", 5), SIX("6", 6),
         SEVEN("7", 7), EIGHT("8", 8), NINE("9", 9),
@@ -20,27 +21,19 @@ public class Enums {
         Y("Y", 34), Z("Z", 35);
 
         private final String digit;
-        private final int weighting;
+        private final int value;
 
-        DigitWeighting(String digit, int weighting) {
+        DigitValue(String digit, int value) {
             this.digit = digit;
-            this.weighting = weighting;
+            this.value = value;
         }
 
-        public static int getWeightingByDigit(String digit) {
-            for (DigitWeighting e : values()) {
+        public static int getValueByDigit(String digit) {
+            for (DigitValue e : values()) {
                 if (e.digit.equalsIgnoreCase(digit))
-                    return e.weighting;
+                    return e.value;
             }
             return 0;
-        }
-
-        public String getDigit() {
-            return digit;
-        }
-
-        public int getWeighting() {
-            return weighting;
         }
     }
 }

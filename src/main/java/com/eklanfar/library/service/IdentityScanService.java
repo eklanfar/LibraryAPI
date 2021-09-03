@@ -157,18 +157,18 @@ public class IdentityScanService {
         log.info("ENTERED - validateCheckDigit; data = {}, checkDigit = {}", data, checkDigit);
 
         // order of digit weights is repeatedly 7,3,1,7,3,1,7...
-        final List<Integer> digitWeighting = Arrays.asList(7, 3, 1);
+        final List<Integer> digitWeightings = Arrays.asList(7, 3, 1);
         final String[] digits = data.split("");
 
-        int digitWeight;
-        int sumOfWeighting = 0;
+        int digitValue;
+        int sumOfMultiplications = 0;
 
         for (int i = 0; i < digits.length; i++) {
-            digitWeight = Enums.DigitWeighting.getWeightingByDigit(digits[i]);
-            sumOfWeighting += digitWeight * digitWeighting.get(i % 3);
+            digitValue = Enums.DigitValue.getValueByDigit(digits[i]);
+            sumOfMultiplications += digitValue * digitWeightings.get(i % 3);
         }
 
-        String calculatedCheckDigit = String.valueOf(sumOfWeighting % 10);
+        String calculatedCheckDigit = String.valueOf(sumOfMultiplications % 10);
         if (!checkDigit.equals(calculatedCheckDigit)) {
             throw new MRTDValidationException("Invalid checkDigit validation, calculated checkDigit = " + calculatedCheckDigit + ", received checkDigit = " + checkDigit);
         }
